@@ -7,6 +7,7 @@
   <meta name="keywords" content="Free HTML Templates">
   <meta name="description" content="Free HTML Templates">
   <title>Nazariya - Course Detail</title>
+  
 
   <!-- Favicon -->
   <link href="img/favicon.ico" rel="icon">
@@ -40,10 +41,10 @@
         class="navbar-brand font-weight-bold text-secondary"
         style="font-size: 50px"
       >
-        <i class="flaticon-043-teddy-bea">
+        <a href="/" class="flaticon-043-teddy-bea">
 
           <img style="width:80px " src="https://res.cloudinary.com/de0baexee/image/upload/v1723267935/dwuhwg9oht2rj8nk8lin.png" alt="">
-        </i>
+        </a>
         <!-- <spa6n class="text-primary">KidKinder</spa6n> -->
       </a>
       <button
@@ -61,13 +62,26 @@
         <div class="navbar-nav font-weight-bold mx-auto py-0">
           <a href="index.html" class="nav-item nav-link">Home</a>
           <a href="about.html" class="nav-item nav-link">About</a>
-          <a href="courses.html" class="nav-item nav-link">Courses</a>
+          <!-- <a href="courses.html" class="nav-item nav-link">Courses</a> -->
           <!-- <a href="team.html" class="nav-item nav-link">Teachers</a> -->
+          <div class="nav-item dropdown">
+            <a
+              href=""
+              class="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              >Courses</a
+            >
+            <div class="dropdown-menu rounded-0 m-0">
+              <a href="./curious-coders.html" class="dropdown-item">Curious Coders</a>
+              <a href="./creative-builders.html" class="dropdown-item">Creative Builders</a>
+              <a href="./ultimate-innovators.html" class="dropdown-item">Ultimate Innovators</a>
+            </div>
+          </div>
+
           <a href="gallery.html" class="nav-item nav-link">Gallery</a>
        
           <a href="contact.html" class="nav-item nav-link">Contact</a>
         </div>
-        <a href="" class="btn btn-primary px-4">Join Courses</a>
       </div>
     </nav>
   </div>
@@ -316,4 +330,22 @@
   <!-- Footer End -->
 
   <!-- Back to Top -->
-  <a href="#" class="btn btn-primary py-3 px-4 back-to-top"><i class="
+  <a href="#" class="btn btn-primary p-3 back-to-top"
+  ><i class="fa fa-angle-double-up"></i
+></a>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
