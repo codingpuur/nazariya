@@ -219,7 +219,17 @@
                 <div class="flex flex-col">
                   <h2 style="font-family: Arial, Helvetica, sans-serif;"  class="text-2xl">Call Us</h2>
                   <p style="font-family: Arial, Helvetica, sans-serif;"  class="text-gray-600">Tel: 8368881409</p>
-                  <h2 style="font-family: Arial, Helvetica, sans-serif;"  class="text-2xl">Mail Us</h2>
+               
+                </div>
+              </div>
+              <div class="flex my-4 w-2/3 lg:w-1/2">
+                <div class="flex flex-col">
+                  <!-- <i class="fas fa-envelope-o pt-2 pr-2   text-black" ></i> -->
+                  <i class="fas fa-envelope pt-2 pr-2 text-black"></i>
+
+                </div>
+                <div class="flex flex-col">
+                   <h2 style="font-family: Arial, Helvetica, sans-serif;"  class="text-2xl">Mail Us</h2>
                   <p style="font-family: Arial, Helvetica, sans-serif;"  class="text-gray-600 ">nazariyalearning@gmail.com</p>
                 </div>
               </div>
@@ -377,12 +387,37 @@
         .then(data => {
           alert('Message sent successfully!');
           form.reset();
+          const userName = formData.get('name'); 
+          const userEmail = formData.get('email'); 
+
+
+        sendEmail(userEmail,userName);
         })
         .catch(error => {
           alert('There was an error sending your message.');
           console.error('Error:', error);
         });
       }
+
+      function sendEmail(userEmail,userName) {
+    fetch('https://nazariya-test.vercel.app/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        recipientEmail: userEmail,
+        recipientName: userName
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Email sent successfully:', data);
+    })
+    .catch(error => {
+      console.error('Error sending email:', error);
+    });
+  }
     </script>
   </body>
 </html>

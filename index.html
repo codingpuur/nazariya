@@ -126,6 +126,7 @@
               <i
                 class="flaticon-050-fence h1 font-weight-normal text-primary mb-3"
               ></i>
+              <i class="fas fa-robot pt-2 pr-2 text-black"></i>
               <div class="pl-4">
                 <h4>Robotics Engineering:</h4>
                 <p class="m-0">
@@ -378,7 +379,7 @@
                 <i class="fa fa-check text-success mr-3"></i> <b>AI Fundamentals:</b> Understanding the basics of Artificial Intelligence and machine learning.
               </li>
             </ul>
-            <a href="" class="btn btn-primary mt-4 py-2 px-4">Book Now</a>
+            <!-- <a href="" class="btn btn-primary mt-4 py-2 px-4">Book Now</a> -->
           </div>
           <div class="col-lg-5">
             <div class="card border-0">
@@ -386,11 +387,13 @@
                 <h1 class="text-white m-0">Request For Call</h1>
               </div>
               <div class="card-body rounded-bottom bg-primary p-5">
-                <form>
+                <form id="contactForm" >
                   <div class="form-group">
                     <input
                       type="text"
                       class="form-control border-0 p-4"
+                      id="name"
+                      name="name"
                       placeholder="Your Name"
                       required="required"
                     />
@@ -398,6 +401,8 @@
                   <div class="form-group">
                     <input
                       type="email"
+                      id="email"
+                      name="email"
                       class="form-control border-0 p-4"
                       placeholder="Your Email"
                       required="required"
@@ -407,17 +412,21 @@
                     <select
                       class="custom-select border-0 px-4"
                       style="height: 47px"
+                      id="course"
+                      name="course"
                     >
                       <option selected>Select A Courses</option>
-                      <option value="1">Curious Coders</option>
-                      <option value="2">Creative Builders</option>
-                      <option value="3">Ultimate Innovators</option>
+                      <option value="Curious Coders">Curious Coders</option>
+                      <option value="Creative Builders">Creative Builders</option>
+                      <option value="Ultimate Innovators">Ultimate Innovators</option>
                     </select>
                   </div>
                   <div>
                     <button
                       class="btn btn-secondary btn-block border-0 py-3"
-                      type="submit"
+                      type="button"
+                      id="sendMessageButton"
+                      onclick="submitForm()"
                     >
                       Book Now
                     </button>
@@ -638,6 +647,14 @@
       ><i class="fa fa-angle-double-up"></i
     ></a>
 
+
+
+
+
+
+
+
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -647,8 +664,78 @@
     <script src="lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <!-- <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script> -->
+
+
+
+
+
+    <script>
+      function submitForm() {
+     
+        var button= document.getElementById('sendMessageButton');
+        button.innerText='Sending';
+       
+        var form = document.getElementById('contactForm');
+        var formData = new FormData(form);
+
+        const now = new Date();
+    const currentDate = now.toISOString().split('T')[0]; // yyyy-mm-dd
+    const currentTime = now.toTimeString().split(' ')[0]; // hh:mm:ss
+
+    // Append date and time to formData
+    formData.append('date', currentDate);
+    formData.append('time', currentTime);
+    
+        fetch('https://script.google.com/macros/s/AKfycbxOuy-W1_OTA9SinqvfO_shcdisFT3Da9mOsU1-HGFxI8_itVZxL5d3LAvAHK_UQiJq/exec', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.innerText='Book Now';
+       
+          alert('Message sent successfully!');
+          form.reset();
+          const userName = formData.get('name'); 
+          const userEmail = formData.get('email'); 
+
+
+        sendEmail(userEmail,userName);
+        })
+        .catch(error => {
+          alert('There was an error sending your message.');
+          console.error('Error:', error);
+        });
+      }
+
+
+
+
+      function sendEmail(userEmail,userName) {
+    fetch('https://nazariya-test.vercel.app/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        recipientEmail: userEmail,
+        recipientName: userName
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Email sent successfully:', data);
+    })
+    .catch(error => {
+      console.error('Error sending email:', error);
+    });
+  }
+
+    </script>
+
+
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

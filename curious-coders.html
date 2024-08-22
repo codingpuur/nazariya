@@ -323,7 +323,7 @@
               <h1 class="text-black m-0">Request for call</h1>
             </div>
             <div style="background-color: rgb(249, 249, 121);" class="card-body rounded-bottom  p-5">
-              <form>
+              <form id="contactForm">
                 <div class="form-group">
                   <input
                     type="text"
@@ -354,7 +354,9 @@
                 <div>
                   <button
                     class="btn btn-secondary btn-block border-0 py-3"
-                    type="submit"
+                    type="button"
+                    id="sendMessageButton"
+                    onclick="submitForm()"
                   >
                     Book Now
                   </button>
@@ -483,6 +485,68 @@
   <a href="#" class="btn btn-primary p-3 back-to-top"
   ><i class="fa fa-angle-double-up"></i
 ></a>
+
+
+<script>
+  function submitForm() {
+ 
+    var button= document.getElementById('sendMessageButton');
+    button.innerText='Sending';
+   
+    var form = document.getElementById('contactForm');
+    var formData = new FormData(form);
+
+    const now = new Date();
+const currentDate = now.toISOString().split('T')[0]; // yyyy-mm-dd
+const currentTime = now.toTimeString().split(' ')[0]; // hh:mm:ss
+
+// Append date and time to formData
+formData.append('date', currentDate);
+formData.append('time', currentTime);
+
+    fetch('https://script.google.com/macros/s/AKfycbxOuy-W1_OTA9SinqvfO_shcdisFT3Da9mOsU1-HGFxI8_itVZxL5d3LAvAHK_UQiJq/exec', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      button.innerText='Book Now';
+   
+      alert('Message sent successfully!');
+      form.reset();
+      const userName = formData.get('name'); 
+          const userEmail = formData.get('email'); 
+
+
+        sendEmail(userEmail,userName);
+    })
+    .catch(error => {
+      alert('There was an error sending your message.');
+      console.error('Error:', error);
+    });
+  }
+
+
+  function sendEmail(userEmail,userName) {
+    fetch('https://nazariya-test.vercel.app/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        recipientEmail: userEmail,
+        recipientName: userName
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Email sent successfully:', data);
+    })
+    .catch(error => {
+      console.error('Error sending email:', error);
+    });
+  }
+</script>
 
 
 
