@@ -4171,6 +4171,11 @@ input[type="button"].btn-block {
   flex-grow: 1;
   align-items: center;
 }
+.navbar-collaps {
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
+}
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
@@ -4226,6 +4231,10 @@ input[type="button"].btn-block {
     display: flex !important;
     flex-basis: auto;
   }
+  .navbar-expand-sm .navbar-collaps {
+    display: flex !important;
+    flex-basis: auto;
+  }
   .navbar-expand-sm .navbar-toggler {
     display: none;
   }
@@ -4259,6 +4268,10 @@ input[type="button"].btn-block {
     flex-wrap: nowrap;
   }
   .navbar-expand-md .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-md .navbar-collaps {
     display: flex !important;
     flex-basis: auto;
   }
@@ -4298,6 +4311,10 @@ input[type="button"].btn-block {
     display: flex !important;
     flex-basis: auto;
   }
+  .navbar-expand-lg .navbar-collaps {
+    display: flex !important;
+    flex-basis: auto;
+  }
   .navbar-expand-lg .navbar-toggler {
     display: none;
   }
@@ -4331,6 +4348,10 @@ input[type="button"].btn-block {
     flex-wrap: nowrap;
   }
   .navbar-expand-xl .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-xl .navbar-collaps {
     display: flex !important;
     flex-basis: auto;
   }
@@ -4369,6 +4390,10 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand .navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+}
+.navbar-expand .navbar-collaps {
   display: flex !important;
   flex-basis: auto;
 }
