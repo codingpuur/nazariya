@@ -410,28 +410,147 @@
   
       </div>
     </section>
-
-
-
-  <section class="py-20 ">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="bg-indigo-600 rounded-2xl p-8 xl:p-11">
-              <h2 class="font-manrope text-4xl text-white text-center font-bold mb-4">Subscribe to the latest offer
-              </h2>
-              <p class="text-indigo-200 text-center mb-11 max-lg:max-w-2xl mx-auto">Join our community of subscribers
-                  and receive regular
-                  updates delivered straight to your inbox. It's quick, easy, and free</p>
-              <div
-                  class="max-w-md mx-auto lg:bg-transparent lg:border border-gray-300 rounded-3xl max-lg:py-3 lg:rounded-full lg:h-12 lg:p-1.5 lg:flex-row gap-6 lg:gap-0 flex-col flex items-center justify-between">
-                  <input type="text" name="email"
-                      class="py-2 px-6 bg-transparent rounded-full max-lg:border border-gray-300  text-gray-100 max-lg:text-center placeholder:text-gray-400 focus:outline-none flex-1 w-full lg:w-auto lg:py-2 lg:px-6 lg:bg-transparent"
-                      placeholder="Enter your email..">
-                  <button type="submit"
-                      class="py-2 px-5 text-sm bg-indigo-500 shadow-md rounded-full  text-white font-semibold hover:bg-indigo-700">Subscribe</button>
+    <section class=" py-0 lg:py-0 bg-gray-50  " >
+      <div id="Registration"  style="max-width: 900px;" class="container-fluid py-3 ">
+        <div style="background-color: rgb(249, 249, 121);  border-radius: 10px;" class="container px-0">
+          <div class="row align-items-center">
+            
+            <!-- Left side: Form -->
+            <div  class="col-lg-6">
+              <div class="card border-0">
+                <div style="background-color: rgb(249, 249, 121);" class="card-heade bg-none text-center p-4">
+                  <h1 class="text-black m-0">Request for call</h1>
+                </div>
+                <div style="background-color: rgb(249, 249, 121);" class="card-body rounded-bottom  p-5">
+                  <form  id="contactForm">
+                    <div class="form-group">
+                      <input
+                      type="text"
+                      class="form-control border-0 p-4"
+                      id="name"
+                      name="name"
+                      placeholder="Your Name"
+                      required="required"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="form-control border-0 p-4"
+                      placeholder="Your Email"
+                      required="required"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <select
+                        class="custom-select border-0 px-4"
+                        style="height: 47px"
+                        id="course"
+                        name="course"
+                      >
+                        <option selected>Select A Course</option>
+                        <option value="1">Curious Coders</option>
+                        <option value="2">Creative Builders</option>
+                        <option value="3">Ultimate Innovators</option>
+                      </select>
+                    </div>
+                    <div>
+                      <button
+                        class="btn btn-secondary btn-block border-0 py-3"
+                        type="button"
+                        id="sendMessageButton"
+                        onclick="submitForm()"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
+            </div>
+      
+            <!-- Right side: Image -->
+            <div class="col-lg-6">
+              <img src="https://demo.htmlcodex.com/2270/preschool-website-template/img/appointment.jpg" alt="Request Call Image" class="img-fluid" />
+            </div>
+            
           </div>
+        </div>
       </div>
-  </section>
+    </section>
+
+
+    <script>
+      function submitForm() {
+     
+        var button= document.getElementById('sendMessageButton');
+        
+        var form = document.getElementById('contactForm');
+        var formData = new FormData(form);
+        var email = formData.get('email');
+        
+        
+        if (!email) {
+          alert('Email and Phone Number are required.');
+          return;
+        }
+        button.innerText='Sending';
+    
+     
+    
+        const now = new Date();
+    const currentDate = now.toISOString().split('T')[0]; // yyyy-mm-dd
+    const currentTime = now.toTimeString().split(' ')[0]; // hh:mm:ss
+    
+    // Append date and time to formData
+    formData.append('date', currentDate);
+    formData.append('time', currentTime);
+    
+        fetch('https://script.google.com/macros/s/AKfycbxOuy-W1_OTA9SinqvfO_shcdisFT3Da9mOsU1-HGFxI8_itVZxL5d3LAvAHK_UQiJq/exec', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.innerText='Book Now';
+       
+          alert('Message sent successfully!');
+          form.reset();
+          const userName = formData.get('name'); 
+              const userEmail = formData.get('email'); 
+    
+    
+            sendEmail(userEmail,userName);
+        })
+        .catch(error => {
+          alert('There was an error sending your message.');
+          console.error('Error:', error);
+        });
+      }
+    
+    
+      function sendEmail(userEmail,userName) {
+        fetch('https://nazariya-test.vercel.app/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            recipientEmail: userEmail,
+            recipientName: userName
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Email sent successfully:', data);
+        })
+        .catch(error => {
+          console.error('Error sending email:', error);
+        });
+      }
+    </script>
 
  
   <script src="https://cdn.jsdelivr.net/npm/pagedone@1.1.2/src/js/pagedone.js"></script>
@@ -492,33 +611,7 @@
 
 
 
-    <div style="max-width: 1000px; margin: 30px auto; padding: 40px;  border-radius: 15px;">
-      <!-- <h1 style="text-align: center; color: #4a90e2; font-size: 2.8em; margin-bottom: 20px;">About Us</h1> -->
-
-      <section style="margin-bottom: 50px;">
-          <h2 style="color: #EBC418; font-size: 2.2em; margin-bottom: 15px;">Making Technology a Part of Every Child's Learning</h2>
-          <p style="font-size: 1.2em; text-align: justify; color: #666;">
-              Committed to teaching new tech skills, we envision a future where every child, regardless of background, is empowered to explore, innovate, and lead.
-          </p>
-      </section>
-
-      <section style="margin-bottom: 50px;">
-          <h2 style="color: #EBC418; font-size: 2.2em; margin-bottom: 15px;">Nazariya Story</h2>
-          <p style="font-size: 1.2em; text-align: justify; color: #666;">
-              Nazariya was born from a deep passion for education and a desire to make a difference. During her journey, Neha discovered that over 90% of people in her community were unaware of the transformative power of tech education, a field she had dedicated a decade of her career to.
-          </p>
-          <p style="font-size: 1.2em; text-align: justify; color: #666;">
-              Nazariya is more than just a learning space—it's a movement to bring cutting-edge education to every corner of the country. We celebrate the importance of teaching, and we're committed to delivering knowledge to everyone who seeks it and deserves it. At Nazariya, we believe in nurturing curiosity, encouraging exploration, and helping young minds think big.
-          </p>
-      </section>
-
-      <section>
-          <h2 style="color: #EBC418; font-size: 2.2em; margin-bottom: 15px;">Our Mission</h2>
-          <p style="font-size: 1.2em; text-align: justify; color: #666;">
-              Our goal is to shape the future by opening new paths of learning and creativity, transforming dreams into tangible achievements and ensuring that every young mind has equal opportunities to become a trailblazer in the digital era.
-          </p>
-      </section>
-  </div>
+   
     <!-- Header End -->
 
     <!-- About Start -->
